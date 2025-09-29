@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { User, Calendar, LogOut } from 'lucide-react'
+import { API_BASE_URL } from '@/core/constants'
 
 const UserDashboard = () => {
   const [activeTab, setActiveTab] = useState('profile')
@@ -39,7 +40,7 @@ const UserDashboard = () => {
     }
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/dashboard', {
+      const res = await fetch(`${API_BASE_URL}/api/dashboard`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       const data = await res.json()
@@ -73,7 +74,7 @@ const UserDashboard = () => {
     }
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/dashboard/appointments', {
+      const res = await fetch('http://127.0.0.1:8001/api/dashboard/appointments', {
         headers: { Authorization: `Bearer ${token}` }
       })
       const data = await res.json()
@@ -94,7 +95,7 @@ const UserDashboard = () => {
     if (!token) return alert('No authentication token found')
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/dashboard', {
+      const res = await fetch('http://127.0.0.1:8001/api/dashboard', {
         method: 'POST',
         headers: { 
           Authorization: `Bearer ${token}`, 
@@ -127,7 +128,7 @@ const UserDashboard = () => {
     }
 
     try {
-      await fetch('http://127.0.0.1:8000/api/logout', {
+      await fetch('http://127.0.0.1:8001/api/logout', {
         headers: { Authorization: `Bearer ${token}` }
       })
     } catch (err) {

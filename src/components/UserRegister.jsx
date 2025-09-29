@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { UserPlus, Mail, Lock, User, Phone } from 'lucide-react'
+import { API_BASE_URL } from '@/core/constants'
 
 const UserRegister = () => {
   const navigate = useNavigate()
@@ -40,7 +41,7 @@ const UserRegister = () => {
     setErrors({})
 
     try {
-      const response = await fetch('http://localhost:8000/api/register', {
+      const response = await fetch(`${API_BASE_URL}/api/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

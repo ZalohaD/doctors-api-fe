@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Stethoscope, MapPin, Phone, Mail, User } from "lucide-react"
+import { API_BASE_URL } from '@/core/constants'
 
 export default function SearchResults() {
   const location = useLocation()
@@ -22,7 +23,7 @@ export default function SearchResults() {
 
   const fetchDoctors = async (searchTerm) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/search?search=${encodeURIComponent(searchTerm)}`)
+      const response = await fetch(`${API_BASE_URL}/search?search=${encodeURIComponent(searchTerm)}`)
       if (response.ok) {
         const data = await response.json()
         setDoctors(data)

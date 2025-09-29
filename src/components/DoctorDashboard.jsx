@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Stethoscope, MapPin, Calendar, Settings, LogOut, User } from 'lucide-react';
+import { API_BASE_URL } from '@/core/constants'
 
 const DoctorDashboard = () => {
   const [activeTab, setActiveTab] = useState('profile');
@@ -82,7 +83,7 @@ const DoctorDashboard = () => {
 
   const fetchFormOptions = async () => {
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/doctor-options');
+      const res = await fetch(`${API_BASE_URL}/api/doctor-options`);
       const data = await res.json();
       if (res.ok) {
         setFormOptions({
@@ -104,7 +105,7 @@ const DoctorDashboard = () => {
     }
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/doctor/me', {
+      const res = await fetch('http://127.0.0.1:8001/api/doctor/me', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -182,7 +183,7 @@ const DoctorDashboard = () => {
     if (!token) return alert('Не знайдено токен авторизації');
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/doctor/me', {
+      const res = await fetch('http://127.0.0.1:8001/api/doctor/me', {
         method: 'PATCH',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -207,7 +208,7 @@ const DoctorDashboard = () => {
     if (!token) return alert('Не знайдено токен авторизації');
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/doctor/me', {
+      const res = await fetch('http://127.0.0.1:8001/api/doctor/me', {
         method: 'PATCH',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ services }),

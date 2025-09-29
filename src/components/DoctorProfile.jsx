@@ -4,7 +4,8 @@ import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { MessageCircle, User, Calendar, AlertCircle, CheckCircle2, Star, ArrowLeft, Phone, Mail, MapPin, Stethoscope, Building2, ChevronLeft, ChevronRight, Edit2, Plus, Settings } from 'lucide-react'
+import { MessageCircle, User, Calendar, AlertCircle, CheckCircle2, Star, ArrowLeft, Phone, Mail, MapPin, Stethoscope, Building2, ChevronLeft, ChevronRight, Edit2, Plus } from 'lucide-react'
+import { API_BASE_URL } from '@/core/constants'
 
 const DoctorProfile = ({ user }) => {
   const { id } = useParams()
@@ -48,7 +49,7 @@ const DoctorProfile = ({ user }) => {
   useEffect(() => {
     const fetchDoctorProfile = async () => {
       try {
-        const endpoint = isDoctor ? 'http://127.0.0.1:8000/api/doctor/me' : `http://127.0.0.1:8000/api/doctor/${id}`
+        const endpoint = isDoctor ? `${API_BASE_URL}/api/doctor/me` : `${API_BASE_URL}/api/doctor/${id}`
         const res = await fetch(endpoint, {
           headers: { 
             'Accept': 'application/json',
@@ -86,7 +87,7 @@ const DoctorProfile = ({ user }) => {
     if (!token) { setReviewError('Користувач не авторизований'); return }
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/submit-review', {
+      const res = await fetch('http://127.0.0.1:8001/api/submit-review', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -121,7 +122,7 @@ const DoctorProfile = ({ user }) => {
   const handleEditSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/doctor/edit', {
+      const res = await fetch('http://127.0.0.1:8001/api/doctor/edit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -156,7 +157,7 @@ const DoctorProfile = ({ user }) => {
     }
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/doctor/services', {
+      const res = await fetch('http://127.0.0.1:8001/api/doctor/services', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -273,7 +274,7 @@ const DoctorProfile = ({ user }) => {
     const toDateTime = formatYmdHi(endTime)
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/appointments', {
+      const res = await fetch('http://127.0.0.1:8001/api/appointments', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

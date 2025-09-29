@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
+import { API_BASE_URL } from '@/core/constants'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ const Contact = () => {
     setStatus('Sending...')
     
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/contact', {
+      const res = await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

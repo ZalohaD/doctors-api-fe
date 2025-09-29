@@ -7,12 +7,13 @@ import { Input } from '@/components/ui/input'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Stethoscope, MapPin, Phone, Mail, Search, User, Home as HomeIcon } from 'lucide-react'
 import HeroSearch from './HeroSearch'
+import { API_BASE_URL } from '@/core/constants'
 
 const Home = () => {
   const [doctors, setDoctors] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, _setSearchTerm] = useState('')
 
   useEffect(() => {
     fetchDoctors()
@@ -20,7 +21,7 @@ const Home = () => {
 
   const fetchDoctors = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/doctors', {
+      const response = await fetch(`${API_BASE_URL}/api/doctors`, {
         headers: {
           'Accept': 'application/json'
         }
@@ -143,7 +144,7 @@ const Home = () => {
                   <div className="mt-2 text-sm text-gray-600">
                     <p className="font-medium mb-1">Доступний час:</p>
                     <ul className="space-y-1">
-                      {doctor.available_time.map((slot, index) => (
+                      {doctor.available_time?.[0]?.map((slot, index) => (
                         <li key={index}>
                           {slot.day}: {slot.from} – {slot.to}
                         </li>

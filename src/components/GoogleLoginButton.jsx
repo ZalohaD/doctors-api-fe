@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
+import { API_BASE_URL } from '@/core/constants'
 
 const GoogleLoginButton = ({ onSuccess, onError }) => {
   const [loading, setLoading] = useState(false)
@@ -9,7 +10,7 @@ const GoogleLoginButton = ({ onSuccess, onError }) => {
     setLoading(true)
     
     // For OAuth flows, direct redirect is the most reliable approach
-  window.location.href = 'http://localhost:8000/auth/google/redirect';
+  window.location.href = `${API_BASE_URL}/auth/google/redirect`;
   }
 
   return (

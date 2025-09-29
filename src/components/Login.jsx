@@ -8,6 +8,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { LogIn, Mail, Lock } from 'lucide-react'
 import GoogleLoginButton from './GoogleLoginButton'
 import { useEffect } from 'react'
+import { API_BASE_URL } from '@/core/constants'
 
 
 const Login = ({ setUser }) => {
@@ -40,7 +41,7 @@ const Login = ({ setUser }) => {
     setErrors({})
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/login', {
+      const response = await fetch(`${API_BASE_URL}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Stethoscope, Mail, Lock } from 'lucide-react'
+import { API_BASE_URL } from '@/core/constants'
 
 const DoctorLogin = ({ setUser }) => {
   const navigate = useNavigate()
@@ -38,7 +39,7 @@ const handleSubmit = async (e) => {
   setErrors({})
 
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/login-doctor', {
+    const response = await fetch(`${API_BASE_URL}/api/login-doctor`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

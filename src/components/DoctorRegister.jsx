@@ -6,7 +6,8 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Stethoscope, Building2, Home, User, Mail, Phone, Lock } from 'lucide-react'
+import { Stethoscope } from 'lucide-react'
+import { API_BASE_URL } from '@/core/constants'
 
 const DoctorRegister = () => {
   const navigate = useNavigate()
@@ -36,7 +37,7 @@ const DoctorRegister = () => {
 
   const fetchOptions = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/doctor-options', {
+      const response = await fetch(`${API_BASE_URL}/api/doctor-options`, {
         headers: { 'Accept': 'application/json' }
       })
       const data = await response.json()
@@ -96,7 +97,7 @@ const DoctorRegister = () => {
     }
     delete payload.specializations
 
-    const response = await fetch('http://127.0.0.1:8000/api/register-doctor', {
+    const response = await fetch('http://127.0.0.1:8001/api/register-doctor', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(payload)
@@ -146,7 +147,13 @@ const DoctorRegister = () => {
               <Label>Клініка</Label>
               <Select onValueChange={val => setFormData({...formData, clinic_id: val})} value={formData.clinic_id}>
                 <SelectTrigger><SelectValue placeholder="Оберіть клініку" /></SelectTrigger>
-                <SelectContent>{options.clinics.map(c => <SelectItem key={c.id} value={c.id.toString()}>{c.name}</SelectItem>)}</SelectContent>
+                <SelectContent>
+                  {options.clinics.map(c => (
+                    <SelectItem key={c.id} value={String(c.id)}>
+                      {c.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
               </Select>
             </div>
 
@@ -154,11 +161,14 @@ const DoctorRegister = () => {
             <div>
               <Label>Спеціалізації</Label>
               <div className="border rounded-md p-2 max-h-40 overflow-y-auto">
-                {Object.entries(options.specializations).map(([key, value]) => (
-                  <div key={key} className="flex items-center space-x-2 mb-1">
-                    <Checkbox id={key} checked={formData.specializations.includes(key)}
-                      onCheckedChange={checked => handleSpecializationChange(key, checked)} />
-                    <Label htmlFor={key}>{value}</Label>
+                {options.specializations.map(spec => (
+                  <div key={spec.value} className="flex items-center space-x-2 mb-1">
+                    <Checkbox
+                      id={spec.value}
+                      checked={formData.specializations.includes(spec.value)}
+                      onCheckedChange={checked => handleSpecializationChange(spec.value, checked)}
+                    />
+                    <Label htmlFor={spec.value}>{spec.label}</Label>
                   </div>
                 ))}
               </div>
