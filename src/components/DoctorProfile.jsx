@@ -87,7 +87,7 @@ const DoctorProfile = ({ user }) => {
     if (!token) { setReviewError('Користувач не авторизований'); return }
 
     try {
-      const res = await fetch('http://127.0.0.1:8001/api/submit-review', {
+      const res = await fetch(`${API_BASE_URL}/api/submit-review`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ const DoctorProfile = ({ user }) => {
   const handleEditSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await fetch('http://127.0.0.1:8001/api/doctor/edit', {
+      const res = await fetch(`${API_BASE_URL}/api/doctor/edit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -157,7 +157,7 @@ const DoctorProfile = ({ user }) => {
     }
 
     try {
-      const res = await fetch('http://127.0.0.1:8001/api/doctor/services', {
+      const res = await fetch(`${API_BASE_URL}/api/doctor/services`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -274,7 +274,7 @@ const DoctorProfile = ({ user }) => {
     const toDateTime = formatYmdHi(endTime)
 
     try {
-      const res = await fetch('http://127.0.0.1:8001/api/appointments', {
+      const res = await fetch(`${API_BASE_URL}/api/appointments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -74,7 +74,7 @@ const UserDashboard = () => {
     }
 
     try {
-      const res = await fetch('http://127.0.0.1:8001/api/dashboard/appointments', {
+      const res = await fetch(`${API_BASE_URL}/api/dashboard/appointments`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       const data = await res.json()
@@ -95,7 +95,7 @@ const UserDashboard = () => {
     if (!token) return alert('No authentication token found')
 
     try {
-      const res = await fetch('http://127.0.0.1:8001/api/dashboard', {
+      const res = await fetch(`${API_BASE_URL}/api/dashboard`, {
         method: 'POST',
         headers: { 
           Authorization: `Bearer ${token}`, 
@@ -128,7 +128,7 @@ const UserDashboard = () => {
     }
 
     try {
-      await fetch('http://127.0.0.1:8001/api/logout', {
+      await fetch(`${API_BASE_URL}/api/logout`, {
         headers: { Authorization: `Bearer ${token}` }
       })
     } catch (err) {

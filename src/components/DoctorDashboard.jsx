@@ -105,7 +105,7 @@ const DoctorDashboard = () => {
     }
 
     try {
-      const res = await fetch('http://127.0.0.1:8001/api/doctor/me', {
+      const res = await fetch(`${API_BASE_URL}/api/doctor/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -183,7 +183,7 @@ const DoctorDashboard = () => {
     if (!token) return alert('Не знайдено токен авторизації');
 
     try {
-      const res = await fetch('http://127.0.0.1:8001/api/doctor/me', {
+      const res = await fetch(`${API_BASE_URL}/api/doctor/me`, {
         method: 'PATCH',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -208,7 +208,7 @@ const DoctorDashboard = () => {
     if (!token) return alert('Не знайдено токен авторизації');
 
     try {
-      const res = await fetch('http://127.0.0.1:8001/api/doctor/me', {
+      const res = await fetch(`${API_BASE_URL}/api/doctor/me`, {
         method: 'PATCH',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ services }),

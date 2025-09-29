@@ -97,7 +97,7 @@ const DoctorRegister = () => {
     }
     delete payload.specializations
 
-    const response = await fetch('http://127.0.0.1:8001/api/register-doctor', {
+    const response = await fetch(`${API_BASE_URL}/api/register-doctor`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(payload)
