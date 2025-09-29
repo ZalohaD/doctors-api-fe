@@ -1,8 +1,9 @@
 // src/pages/SearchResults.jsx
 import { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, Link } from "react-router-dom"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Stethoscope, MapPin, Phone, Mail, User } from "lucide-react"
 import { API_BASE_URL } from '@/core/constants'
@@ -23,7 +24,7 @@ export default function SearchResults() {
 
   const fetchDoctors = async (searchTerm) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/search?search=${encodeURIComponent(searchTerm)}`)
+      const response = await fetch(`${API_BASE_URL}/api/search?search=${encodeURIComponent(searchTerm)}`)
       if (response.ok) {
         const data = await response.json()
         setDoctors(data)
@@ -106,6 +107,13 @@ export default function SearchResults() {
                     </div>
                   )}
                 </div>
+
+                {/* View Profile Button */}
+                <Link to={`/doctor/${doctor.id}`} className="block">
+                  <Button className="w-full mt-4">
+                    Переглянути профіль
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           ))}

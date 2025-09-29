@@ -66,12 +66,6 @@ const logout = () => {
     <Router>
   <div className="min-h-screen bg-gray-50">
     <Header user={user} logout={logout} />
-
-    {/* Тут показуємо, залогінений користувач чи ні */}
-    <div className="text-center my-4">
-      {user ? 'Користувач залогінений' : 'Користувач не залогінений'}
-    </div>
-
     <main className="container mx-auto px-4 py-8">
       <Routes>
         <Route 
